@@ -5,14 +5,14 @@
 <!DOCTYPE html>
 <%
 Cadastro cadastro = new Cadastro(); 
-
+CadastroDAO dao = new CadastroDAO();
 cadastro.setNome(request.getParameter("nome"));
 cadastro.setCpf(request.getParameter("cpf"));
 cadastro.setEndereco(request.getParameter("endereco"));
 cadastro.setCidade(request.getParameter("cidade"));
 cadastro.setTelefone(request.getParameter("telefone"));
 
-CadastroDAO dao = new CadastroDAO();
+cadastro = dao.buscar(cadastro);
 
 Boolean ret =  dao.inserir(cadastro);
 String msg;
@@ -25,42 +25,41 @@ if(ret==true){
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cadastrar</title>
+<title>Editar</title>
 </head>
 <body>
 	<form action="CadastroUsuario" method="post">
 		<table>
 		<tr>
-		<td>Nome: </td>
-		<td><input type="text" name="nome">
+			<td>Nome: </td>
+			<td><input type="text" name="nome" value="<%=cadastro.getNome()%>">
 		</tr>
-				<tr>
-		<td>CPF: </td>
-		<td><input type="text" name="cpf">
+		
+		<tr>
+			<td>CPF: </td>
+			<td><input type="text" name="cpf" value="<%=cadastro.getCpf()%>">
 		</tr>
-				<tr>
-		<td>Endereço: </td>
-		<td><input type="text" name="endereco">
+		
+		<tr>
+			<td>Endereço: </td>
+			<td><input type="text" name="endereco" value="<%=cadastro.getEndereco()%>">
 		</tr>
-				<tr>
-		<td>Cidade: </td>
-		<td><input type="text" name="cidade">
+		
+		<tr>
+			<td>Cidade: </td>
+			<td><input type="text" name="cidade" value="<%=cadastro.getCidade()%>">
 		</tr>
-				<tr>
-		<td>Telefone: </td>
-		<td><input type="text" name="telefone">
+		
+		<tr>
+			<td>Telefone: </td>
+			<td><input type="text" name="telefone" value="<%=cadastro.getTelefone()%>">
 		</tr>
 		
 		<tr>
 			<td colspan="2">
 			<input type="submit">
 		</tr>
-		
-		
-		<tr>
-			<td colspan="2"><a href="Pesquisa.jsp">Pesquisar</a></td>
-			<input type="submit">
-		</tr>
+
 		</table>
 
 	</form>
